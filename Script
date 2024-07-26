@@ -1,97 +1,70 @@
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local ArrayField = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hosvile/Refinement/main/MC%3AArrayfield%20Library"))()
+--Documentation url: https://docs.sirius.menu/community/arrayfield
 
-local Window = OrionLib:MakeWindow({Name = "Capybara hub", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+local Window = ArrayField:CreateWindow({
+        Name = "Capybara",
+        LoadingTitle = "Capybara Hub Interface",
+        LoadingSubtitle = "by Emris",
+        ConfigurationSaving = {
+            Enabled = true,
+            FolderName = nil, -- Create a custom folder for your hub/game
+            FileName = "Emris"
+        },
+        Discord = {
+            Enabled = false,
+            Invite = "sirius", -- The Discord invite code, do not include discord.gg/
+            RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+        },
+        KeySystem = false, -- Set this to true to use our key system
+        KeySettings = {
+            Title = "Emris",
+            Subtitle = "Key System",
+            Note = nil,
+            FileName = "ArrayFieldsKeys",
+            SaveKey = false,
+            GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like ArrayField to get the key from
+            Key = {"Hello",'Bye'},
+            Actions = {
+                [1] = {
+                    Text = 'Click here to copy the key link',
+                    OnPress = function()
 
---[[
-Name = <string> - The name of the UI.
-HidePremium = <bool> - Whether or not the user details shows Premium status or not.
-SaveConfig = <bool> - Toggles the config saving in the UI.
-ConfigFolder = <string> - The name of the folder where the configs are saved.
-IntroEnabled = <bool> - Whether or not to show the intro animation.
-IntroText = <string> - Text to show in the intro animation.
-IntroIcon = <string> - URL to the image you want to use in the intro animation.
-Icon = <string> - URL to the image you want displayed on the window.
-CloseCallback = <function> - Function to execute when the window is closed.
-]]
+                    end,
+                }
+            },
+        }
+    })
 
-local MainTab = Window:MakeTab({
-    Name = "Tab 1",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
-}) 
+local MM2Tab = Window:CreateTab("MM2", 4483362458) -- Title, Image
+local MM2Section = MM2Tab:CreateSection("MM2",false) -- The 2nd argument is to tell if its only a Title and doesnt contain element
 
---[[
-Name = <string> - The name of the tab.
-Icon = <string> - The icon of the tab.
-PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
-]]
+local PrisonTab = Window:CreateTab("Prison Life", 4483362458) -- Title, Image
+local PrisonSection = PrisonTab:CreateSection("Prison Life",false) -- The 2nd argument is to tell if its only a Title and doesnt contain element
 
-local MainSection = MainTab:AddSection({
-    Name = "Cotoletta2919"
+local Slider = PrisonTab:CreateSlider({
+   Name = "Speed",
+   Range = {0, 300},
+   Increment = 1,
+   Suffix = "Speed",
+   CurrentValue = 16,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = (Value)
+   end,
 })
 
---[[
-Name = <string> - The name of the section.
-]]
-
-OrionLib:MakeNotification({
-    Name = "Welvome",
-    Content = "Notification content... what will it say??",
-    Image = "rbxassetid://4483345998",
-    Time = 5
+local Button = MM2Tab:CreateButton({
+   Name = "Yarhm",
+   Interact = 'Click',
+   Callback = function()
+        loadstring(game:HttpGet("https://yarhm.goteamst.com/scr", false))()
+   end,
 })
 
---[[
-Title = <string> - The title of the notification.
-Content = <string> - The content of the notification.
-Image = <string> - The icon of the notification.
-Time = <number> - The duration of the notfication.
-]]
-
-MainTab:AddButton({
-	Name = "yarhm mm2",
-	Callback = function()
-      		loadstring(game:HttpGet("https://yarhm.goteamst.com/scr", false))()
-  	end    
+local Button = PrisonTab:CreateButton({
+   Name = "infinty yield",
+   Interact = 'Click',
+   Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+   end,
 })
-
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
-
-MainTab:AddSlider({
-	Name = "Speed",
-	Min = 0,
-	Max = 300,
-	Default = 16,
-	Color = Color3.fromRGB(255,255,255),
-	Increment = 1,
-	ValueName = "speed",
-	Callback = function(Value)
-		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = (Value)
-	end    
-})
-
---[[
-Name = <string> - The name of the slider.
-Min = <number> - The minimal value of the slider.
-Max = <number> - The maxium value of the slider.
-Increment = <number> - How much the slider will change value when dragging.
-Default = <number> - The default value of the slider.
-ValueName = <string> - The text after the value number.
-Callback = <function> - The function of the slider.
-]]
-
-MainTab:AddButton({
-	Name = "X Hub mm2",
-	Callback = function()
-      		loadstring(game:HttpGet("https://raw.githubusercontent.com/Au0yX/Community/main/XhubMM2"))()
-  	end    
-})
-
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
-
